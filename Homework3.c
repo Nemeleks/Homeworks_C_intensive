@@ -1,3 +1,10 @@
+/*
+ * Homework 3.
+ *
+ * Visual Studio Code
+ * 
+ * Created by Igor Kulychev
+ */
 #include <stdio.h>
 #include <math.h>
 #define ARR_LENGHT 10 // for 3.3
