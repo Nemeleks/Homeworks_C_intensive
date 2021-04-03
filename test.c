@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <math.h>
-
-int calcSquareEq(int a, int b, int c, double *x1, double *x2 )
+#define ARR_LENGHT 4
+//3.1
+int calcSquareEq(int a, int b, int c, double* x1, double* x2 )
 {
     double d = pow(b,2) - (4 * a * c);
     if (d < 0)
@@ -10,7 +11,7 @@ int calcSquareEq(int a, int b, int c, double *x1, double *x2 )
     }
     else if ( d == 0)
     {
-        *x1 = -b / (2 * a);
+        *x1 = -(double)b / (2 * a);
         *x2 = *x1;
         return 0;
     }
@@ -21,7 +22,7 @@ int calcSquareEq(int a, int b, int c, double *x1, double *x2 )
         return 1;
     }
 }
-
+//3.1 end
 int main (int argc, char **argv)
 {
     int a = 2;
@@ -29,7 +30,8 @@ int main (int argc, char **argv)
     int c = 4;
     int result;
     double x1, x2;
-
+    int arr[ARR_LENGHT];
+//3.1
     result = calcSquareEq(a, b, c, &x1, &x2);
     switch (result)
     {
@@ -42,6 +44,8 @@ int main (int argc, char **argv)
     default:
         printf("Equation has two roots. x1 = %.2lf  x2 = %.2lf\n", x1, x2);
         break;
-    }   
+    }
+//3.1 end
+
     return 0;
 }
