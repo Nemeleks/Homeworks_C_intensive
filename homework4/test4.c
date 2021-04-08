@@ -1,15 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void generateArray(int ***arr, int rows, int cols)
+int generateArray(int ***arr, int rows, int cols)
 {    
     *arr = (int **)malloc(rows * sizeof(int*));
     if (*arr == NULL)
-        return 1;
-        for (int i = 0; i < rows; i++)
-        {
-            *(*(arr)+i) = (int*)calloc(cols, sizeof(int));
-        }       
+        return 0;
+    for (int i = 0; i < rows; i++)
+    {
+        (*arr)[i] = (int*)calloc(cols, sizeof(int));
+        if ((*arr)[i] == NULL)
+            return 0;
+    }
+    return 1;       
 }
     
 
@@ -22,7 +25,11 @@ int main (int argc, char** argv)
     scanf("%d", &rows);
     printf("Enter the number of cols :");
     scanf("%d", &cols);
-    generateArray(&arr, rows, cols);
+    if (generateArray(&arr, rows, cols) == 0)
+        {
+            printf("Memory ERROR!");
+            return 1;
+        }
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j++)
@@ -33,10 +40,7 @@ int main (int argc, char** argv)
     }
      for (int i = 0; i < rows; i++)
     {
-        for (int j = 0; j < cols; j++)
-        {
             free(arr[i]);
-        }
     }
     free(arr);
     return 0;

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-//#include <ctype.h>
 
 char* itb(unsigned a)
 {
@@ -9,27 +8,20 @@ char* itb(unsigned a)
     int temp;
     int len;
 
-    len =0;
-    if (!a)
+    len = 0;
+    if (a == 0)
         len++;
     temp = a;
-    while (temp)
+    while (temp != 0)
     {
-        temp >>= 1;
+        temp /= 2;
         len++;
     }
     buffer = (char*)malloc(len + 1);
+    if (buffer == NULL)
+        return NULL;
     itoa(a, buffer, 2);
-    return (buffer);
-
-    // char string[6];
-    // itoa(a, string, 2);
-    // len = strlen(string);
-    // char *buffer = (char*)malloc(len+1);
-    // if (buffer == NULL)
-    //     return 0;
-    // buffer = string;
-    // return buffer;
+    return buffer;
 }
 
 int main (int argc, char** argv)
@@ -39,6 +31,11 @@ int main (int argc, char** argv)
     printf("Enter unsigned integer: ");
     scanf("%d", &num);
     result = itb(num);
+    if (result == NULL)
+        {
+            printf("Memory ERROR!");
+            return 1;
+        }
     printf("Your numer %d in binar system : %s\n", num, result);
     free(result);
 
