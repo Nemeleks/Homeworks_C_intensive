@@ -3,10 +3,12 @@
 
 void generateArray(int ***arr, int rows, int cols)
 {    
-    arr = malloc(rows * sizeof(int*));
+    *arr = (int **)malloc(rows * sizeof(int*));
+    if (*arr == NULL)
+        return 1;
         for (int i = 0; i < rows; i++)
         {
-            arr[i] = calloc(cols, sizeof(int));
+            *(*(arr)+i) = (int*)calloc(cols, sizeof(int));
         }       
 }
     
@@ -14,17 +16,28 @@ void generateArray(int ***arr, int rows, int cols)
 int main (int argc, char** argv)
 {
     int **arr;
-    int rows = 6;
-    int cols = 2;
+    int rows;
+    int cols;
+    printf("Enter the number of rows :");
+    scanf("%d", &rows);
+    printf("Enter the number of cols :");
+    scanf("%d", &cols);
     generateArray(&arr, rows, cols);
-    int **arr_result = arr;
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j++)
         {
-            printf("%d ",arr_result[i][j]);
+            printf("%d ",arr[i][j]);
         }
         printf("\n");
     }
+     for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            free(arr[i]);
+        }
+    }
+    free(arr);
     return 0;
 }
